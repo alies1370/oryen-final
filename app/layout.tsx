@@ -1,45 +1,29 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+ // app/layout.tsx
+import './globals.css';
+import type { Metadata } from 'next';
+import { Vazirmatn } from 'next/font/google'; // فونت فارسی زیبا
+import { RestaurantProvider } from './context/RestaurantContext';
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-import type { Viewport } from 'next'
-
-export const viewport: Viewport = {
-  themeColor: '#ffffff', // رنگ نوار بالای گوشی (می‌توانید کد رنگ دیگری بگذارید)
-  width: 'device-width',
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false, // جلوگیری از زوم ناخواسته در موبایل
-}
-
+const vazir = Vazirmatn({ subsets: ['arabic'] });
 
 export const metadata: Metadata = {
-  title: "بهای تمام شده اورین",
-  description: "سیستم مدیریت قیمت‌گذاری",
-  manifest: "/manifest.json", // این خط اتصال به فایل مرحله ۲ است
+  title: 'سیستم مدیریت رستوران',
+  description: 'محاسبه بهای تمام شده و مدیریت منو',
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="fa" dir="rtl">
+      <body className={vazir.className}>
+        <RestaurantProvider>
+          {children}
+        </RestaurantProvider>
       </body>
     </html>
   );
 }
+
